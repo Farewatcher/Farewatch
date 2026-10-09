@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Track flight prices and get notified when fares drop. FareWatch is in early development.">
+  <title>FareWatch — Catch the drop</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="FareWatch home"><span class="brand-mark">↘</span> FareWatch</a>
+    <span class="topnote">FLIGHT PRICE WATCHLIST</span>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="eyebrow"><span class="live-dot"></span> YOUR NEXT FARE DROP STARTS HERE</div>
+      <h1>Don't chase flight prices.<br><span>Let them come down to you.</span></h1>
+      <p class="intro">Set your route, choose how long to watch, and prepare for fare-drop alerts in one simple place.</p>
+      <div class="trust-row"><span>✓ Free to start</span><span>✓ Your route, your rules</span><span>✓ No booking required</span></div>
+    </section>
+
+    <section class="workspace">
+      <form id="watch-form" class="watch-card">
+        <div class="card-heading">
+          <div><p class="section-kicker">CREATE A WATCH</p><h2>Where do you want to go?</h2></div>
+          <span class="step-pill">01 / ROUTE</span>
+        </div>
+        <div class="trip-toggle" role="group" aria-label="Trip type">
+          <label><input type="radio" name="tripType" value="roundtrip" checked><span>Round trip</span></label>
+          <label><input type="radio" name="tripType" value="oneway"><span>One way</span></label>
+        </div>
+        <div class="route-grid">
+          <label class="field"><span>FROM · AIRPORT CODE</span><input id="origin" name="origin" maxlength="3" placeholder="MYR" value="MYR" required autocomplete="off"><small>Example: MYR · Myrtle Beach</small></label>
+          <div class="route-arrow" aria-hidden="true">→</div>
+          <label class="field"><span>TO · AIRPORT CODE</span><input id="destination" name="destination" maxlength="3" placeholder="JFK" required autocomplete="off"><small>Example: JFK · New York</small></label>
+        </div>
+        <div class="field-grid">
+          <label class="field"><span>DEPARTURE</span><input id="departureDate" name="departureDate" type="date" required></label>
+          <label class="field" id="return-field"><span>RETURN</span><input id="returnDate" name="returnDate" type="date" required></label>
+        </div>
+        <div class="line"></div>
+        <div class="card-heading small-heading"><div><p class="section-kicker">SET YOUR RULES</p><h2>How should we watch?</h2></div><span class="step-pill">02 / ALERTS</span></div>
+        <div class="field-grid">
+          <label class="field"><span>MONITOR FOR</span><select id="durationDays" name="durationDays"><option value="1">24 hours</option><option value="7" selected>7 days</option><option value="14">14 days</option><option value="30">30 days</option><option value="60">60 days</option></select></label>
+          <label class="field"><span>CHECK FREQUENCY</span><select id="frequencyHours" name="frequencyHours"><option value="24" selected>Once a day</option><option value="12">Every 12 hours</option><option value="6">Every 6 hours</option></select></label>
+        </div>
+        <label class="field"><span>ALERT ME WHEN PRICE DROPS</span>
+          <select id="dropPercent" name="dropPercent"><option value="0">Any decrease</option><option value="10" selected>10% or more</option><option value="25">25% or more</option><option value="50">50% or more</option></select>
+        </label>
+        <div class="field-grid">
+          <label class="field"><span>TARGET PRICE · USD (OPTIONAL)</span><input id="targetPrice" name="targetPrice" type="number" min="1" step="1" placeholder="e.g. 350"></label>
+          <label class="field"><span>EMAIL FOR ALERTS</span><input id="email" name="email" type="email" placeholder="you@example.com" required autocomplete="email"></label>
+        </div>
+        <button class="submit-button" type="submit">Save my flight watch <span>↗</span></button>
+        <p class="form-note">Early-access build: this currently saves your watch settings only. It does not yet check live prices or send alerts.</p>
+        <div id="form-message" class="form-message" role="status" aria-live="polite" hidden></div>
+      </form>
+
+      <aside class="side-column">
+        <div class="preview-card">
+          <div class="preview-top"><span class="section-kicker">YOUR WATCH, AT A GLANCE</span><span class="spark">✳</span></div>
+          <div class="route-preview"><span id="preview-origin">MYR</span><span class="dashed"></span><span id="preview-destination">---</span></div>
+          <p id="preview-dates" class="preview-dates">Choose your travel dates</p>
+          <div class="preview-divider"></div>
+          <div class="stat-row"><span>Monitoring window</span><strong id="preview-duration">7 days</strong></div>
+          <div class="stat-row"><span>Price check</span><strong id="preview-frequency">Daily</strong></div>
+          <div class="stat-row"><span>Drop threshold</span><strong id="preview-drop">10% or more</strong></div>
+          <div class="price-placeholder"><span class="pulse"></span><div><strong>Price tracking is next</strong><small>Live fare connection not configured</small></div></div>
+        </div>
+        <div class="how-card">
+          <p class="section-kicker">THE FAREWATCH PLAN</p>
+          <div class="how-step"><span>1</span><div><strong>Choose your route</strong><p>Set airports, dates, and your price target.</p></div></div>
+          <div class="how-step"><span>2</span><div><strong>Watch prices automatically</strong><p>Scheduled checks compare new fares with your baseline.</p></div></div>
+          <div class="how-step"><span>3</span><div><strong>Get an alert and booking link</strong><p>Eligible affiliate links can help support the free service.</p></div></div>
+          <p class="fineprint">Step 2 and step 3 are planned features, not active in this starter build.</p>
+        </div>
+      </aside>
+    </section>
+    <section class="bottom-note"><div class="note-icon">✦</div><div><strong>Built around your travel plans.</strong><p>FareWatch is being developed to help travelers notice price changes without checking airline sites all day.</p></div></section>
+  </main>
+  <footer><a class="brand footer-brand" href="/">↘ FareWatch</a><span>Early access · Independent project · Not an airline</span></footer>
+  <script src="/app.js"></script>
+</body>
+</html>

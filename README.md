@@ -1,42 +1,54 @@
-# FareWatch ✈️
+# FareWatch — starter build
 
-**Track flight prices. Get alerts. Find better fares.**
+FareWatch is an early-stage custom website for collecting flight-watch preferences.
 
-FareWatch is a flight-price monitoring website concept designed to help travelers monitor airfare, set target prices, and receive alerts when fares meet their chosen criteria.
+## What is implemented
 
-## Features
+- Responsive homepage and flight-watch form.
+- Round-trip and one-way selection.
+- Airport-code, date, monitoring-duration, frequency, and drop-threshold inputs.
+- Server-side input validation.
+- SQLite persistence for submitted watch settings.
+- `GET /api/health` health endpoint.
+- `GET /api/watches` development endpoint for viewing saved watches.
+- Honest UI copy showing that live prices and alerts are not active yet.
 
-* Search using departure and destination airports.
-* Select departure and return dates.
-* Choose how long to monitor flight prices.
-* Set a target price or percentage price-drop threshold.
-* Save and view flight watches.
-* Plan for email notifications and affiliate booking links.
+## What is NOT implemented yet
 
-## How It Works
+- Live flight-price data/API connection.
+- Scheduled recurring fare checks.
+- Email verification, sign-in, unsubscribe, and privacy workflow.
+- Email or push notifications.
+- Affiliate tracking/booking links.
+- Production-grade database, rate limiting, monitoring, security review, and deployment.
 
-1. Enter your departure and destination airports.
-2. Select your travel dates.
-3. Choose your price-alert preferences.
-4. Save your flight watch.
-5. Receive alerts when the connected service detects qualifying price changes.
+Do not collect real customer emails publicly until the privacy policy, consent, deletion, and unsubscribe workflows are in place. The current `GET /api/watches` endpoint is for development only and must be protected or removed before public deployment.
 
-## Business Model
+## Run locally
 
-FareWatch plans to earn revenue through travel affiliate partnerships. When visitors click affiliate links and complete eligible bookings, FareWatch may earn a commission.
+Requires Node.js 20 or newer.
 
-## Current Status
+```bash
+npm install
+cp .env.example .env
+npm run dev
+```
 
-This is an early-stage prototype. Flight-price checks, automated email alerts, live fare data, and affiliate tracking still need to be connected.
+Open http://localhost:3000.
 
-## Future Plans
+On Windows, create `.env` by copying `.env.example` manually if `cp` is unavailable.
 
-* Integrate a suitable flight-data provider.
-* Add automated price monitoring.
-* Enable email notifications.
-* Connect approved travel affiliate programs.
-* Deploy the website publicly.
+## Before public launch
 
-## Important Note
+1. Select and verify a flight data provider whose terms permit scheduled recurring price checks and affiliate links.
+2. Add a real scheduler/worker and baseline-price model.
+3. Add email delivery using a transactional email provider.
+4. Replace local SQLite with a durable managed database before hosting on an ephemeral free filesystem.
+5. Add authentication or secure access to watch records; remove or protect the development watch-list endpoint.
+6. Add privacy policy, terms, consent, deletion, and unsubscribe support.
+7. Register affiliate programs and use only approved links/creative assets.
+8. Deploy and test in a staging environment before sharing with the public.
 
-Flight prices and availability can change frequently. FareWatch will need a reliable data provider before it can display live fares or send real price-drop alerts.
+## Zero-budget deployment note
+
+A free host can be useful for a preview, but free services may sleep and local files may be erased on restart/redeploy. That makes a free ephemeral host unsuitable for dependable background fare monitoring and durable SQLite data. Use it for a demo only until a persistent database and scheduled worker are configured.
